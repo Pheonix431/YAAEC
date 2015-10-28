@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
+var common = require("./common");
+var config = common.config();
 
 var User = mongoose.model("User");
 
