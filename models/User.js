@@ -12,7 +12,6 @@ var UserSchema = new mongoose.Schema({
   card : {} // don't worry about this, this is jus
 });
 
-
 mongoose.model("User", UserSchema);
 
 
