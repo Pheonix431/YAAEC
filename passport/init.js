@@ -2,6 +2,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require("mongoose");
 var User = mongoose.model('User');
 var crypto = require('crypto');
+var common = require("../common");
+var config = common.config();
 
 var mailer = require("../mail/mail");
 
@@ -17,7 +19,6 @@ module.exports = function(passport){
     });
   });
 
-
   //Local signup
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'username',
@@ -29,7 +30,7 @@ module.exports = function(passport){
 
   var usr = req.body.username;
   var email = req.body.email;
-    User.findOne({$or:[{'local.username':usr}, {'local.email':email}]}).populate('whiteboards').exec(function(err, user){
+  User.findOne({$or:[{'local.username':usr}, {'local.email':email}]}).exec(function(err, user){
         if (err){
           return done(err);
         }
@@ -49,11 +50,11 @@ module.exports = function(passport){
             if (err) {
               throw err;
             }
-            var body = 'Thank you for registering at Hello World. </br> Click <a href="http://realtimecollab.com/activate?token='+newUser.token+'">here</a> to activate your profile.'
+            var body = 'Thank you for registering at Hello World. </br> Click <a href="' +config.BASE_URL+'"/activate?token='+newUser.token+'">here</a> to activate your profile.'
             mailer.setMailOptions({
               token: newUser.token,
               email: newUser.local.email,
-              subject: "Email confirmation - RealtimeWhiteboard"
+              subject: "Email confirmation - HelloWorld"
             });
             mailer.setMailBody(body);
 

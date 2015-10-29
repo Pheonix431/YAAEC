@@ -1,5 +1,16 @@
 <html>
   <body>
-    <h1><%= title %> </h1>
+    <h1>Express</h1>
+    <% if (success) { %>
+      <div class="alert alert-success">
+        <%= success %>
+      </div>
+    <% } %>
+
+    <% if (signupMessage) { %>
+      <div class="alert alert-danger">
+        <%= signupMessage %>
+      </div>
+    <% } %>
   </body>
 </html>

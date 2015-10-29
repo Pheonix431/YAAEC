@@ -7,7 +7,6 @@ app.factory("notification", function($timeout){
     console.log(message);
     $("#tes1 div p").text("");
     $("#tes1 div p").append(message);
-    debugger;
   }
   o.showNotification = function(){
     $("#tes1").fadeIn(500);

@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <script src="javascripts/angular.min.js"></script>
-    <script src="javascripts/angularApp.js"></script>
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/user.js"></script>
     <style>
         body        { padding-top:80px; }
 
@@ -18,22 +18,23 @@
     input:-moz-ui-invalid { box-shadow: none; }
     </style>
 </head>
-<body ng-app="regis" ng-controller="signup">
+<body ng-app="user" ng-controller="signup">
 
 <div class="col-sm-6 col-sm-offset-3">
-  <form action="/signup" method="post">
+  <h2>Signup</h2>
+  <form action="/users/signup" method="post">
       <div class="form-group signup" ng-controller="signup">
           <div id="input_container">
             <input class="form-control" type="text" ng-model="email" id="input" name="email" placeholder="PennState email" style="border-bottom:0px">
             <img ng-show="loadingEmail" src="http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif" id="input_img">
-            <img ng-show="eNotTaken" src="images/Tick.png" id="input_img">
-            <img ng-show="eTaken" src="images/cross.png" id="input_img">
+            <img ng-show="eNotTaken" src="/images/Tick.png" id="input_img">
+            <img ng-show="eTaken" src="/images/cross.png" id="input_img">
           </div>
           <div id="input_container">
             <input type="text" class="form-control" ng-model="username" name="username" placeholder="Username" style="border-bottom:0px">
             <img ng-show="loadingUser" src="http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif" id="input_img">
-            <img ng-show="userFree" src="images/Tick.png" id="input_img">
-            <img ng-show="userNotFree" src="images/cross.png" id="input_img">
+            <img ng-show="userFree" src="/images/Tick.png" id="input_img">
+            <img ng-show="userNotFree" src="/images/cross.png" id="input_img">
           </div>
           <input type="password" class="form-control" name="password" placeholder="Password">
       </div>

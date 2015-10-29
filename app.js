@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var flash = require("connect-flash");
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -20,7 +21,6 @@ var app = express();
 
 var passport = require('passport');
 var expressSession = require('express-session');
-app.use(compress());
 app.use(expressSession({secret:'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());

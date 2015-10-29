@@ -1,3 +1,4 @@
+var mongoose = require("mongoose");
 var passport = require("passport");
 require("../models/User");
 
@@ -8,10 +9,10 @@ var passport = require("passport");
 
 /* GET users listing. */
 router.get('/signup', function(req,res){
-  res.render('signup');
+  res.render('user/signup');
 });
 
-router.post('/signup', middleware.checkAccount, passport.authenticate('local-signup', {
+router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/',
   failureFlash: true
