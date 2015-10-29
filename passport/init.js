@@ -50,7 +50,7 @@ module.exports = function(passport){
             if (err) {
               throw err;
             }
-            var body = 'Thank you for registering at Hello World. </br> Click <a href="' +config.BASE_URL+'"/activate?token='+newUser.token+'">here</a> to activate your profile.'
+            var body = 'Thank you for registering at Hello World. </br> Click <a href="' +config.BASE_URL+'/activate?token='+newUser.token+'">here</a> to activate your profile.'
             mailer.setMailOptions({
               token: newUser.token,
               email: newUser.local.email,

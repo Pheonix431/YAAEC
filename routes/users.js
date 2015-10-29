@@ -12,6 +12,10 @@ router.get('/signup', function(req,res){
   res.render('user/signup');
 });
 
+router.get('/login', function(req,res){
+  res.render('user/login');
+});
+
 router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/',
