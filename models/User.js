@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({
   name: { first : String, last: String },
+  cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
   local : {
     username: String,
     email: String,
@@ -23,3 +24,4 @@ UserSchema.methods.validPassword = function(password) {
 };
 
 mongoose.model("User", UserSchema);
+
