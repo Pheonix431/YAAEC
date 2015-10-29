@@ -8,7 +8,10 @@ var mongoose = require("mongoose");
 var common = require("./common");
 var config = common.config();
 
+
+require('./models/User');
 var User = mongoose.model("User");
+mongoose.connect(config.mongo);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
