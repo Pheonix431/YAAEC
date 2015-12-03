@@ -3,12 +3,17 @@
   <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/notification.js"></script>
     <script src="/javascripts/angularApp.js"></script>
   </head>
+<nav class"navbar navbar-default">
+  <button style="float:right;"><a href="/users/cart" >View cart</a></button>
+</nav>
+</br>
     <div ng-controller="home" class="">
-      <div ng-repeat="product in products" style="text-align:center;cursor:pointer;">
+      <div ng-repeat="product in products" style="text-align:center;">
        <h3> {{ product.name }} </h3>
-      <img src="{{ product.static_data.img_url}}"/>
+      <img ng-click="addToCard(product._id)" src="{{ product.static_data.img_url}}" style="cursor:pointer"/>
       </div>
     </div>
    

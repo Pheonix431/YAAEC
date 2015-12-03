@@ -60,6 +60,8 @@ router.get("/get/cart", isLoggedIn, function(req ,res, next){
 router.post('/add/cart', isLoggedIn, function(req, res, next){
   Item.find({"_id": req.body.id }, function(err, item){
     req.user.cart.push(item.id);
+    req.user.save();
+    return res.json(req.user);
   });
 });
 
