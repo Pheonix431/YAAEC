@@ -10,7 +10,7 @@ var User = mongoose.model("User");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { success: req.flash("success")[0], failure: req.flash("signupMessage")[0] });
+  res.render('index', { success: req.flash("success")[0], failure: req.flash("signupMessage")[0], user: req.user });
 });
 
 router.get('/test', function(req ,res ,next){
