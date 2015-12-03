@@ -60,7 +60,7 @@ router.post('/login', function(req,res,next) {
 
 router.get("/get/cart", isLoggedIn, function(req ,res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
-    return res.render("user/cart", { cart: req.user.cart });
+    return res.render("user/cart", { cart: req.user.cart, user: req.user });
   });
 });
 

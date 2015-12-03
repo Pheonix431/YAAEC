@@ -32,17 +32,36 @@
     <% } else { %>
       <a href="/users/logout"><button class="btn" style="float:left;margin-top:8px;">logout</button></a>
       <li style="position:relative;">
-        <a href="#"><span class="glyphicon glyphicon-user"></span></a>
+        <a id="drop" href="#"><span class="glyphicon glyphicon-user"></span></a>
         <div class="user-dropdown">
-            <div>
-              Purchases
-            </div>
-            <div>
-              Orders
-            </div>
-            <div>
-              Account details
-            </div>
+            <a href="/users/purchases">
+              <div>
+                Purchases
+              </div>
+            </a>
+            <a href="/users/refunds">
+              <div>
+                Refunds
+              </div>
+            </a>
+            <a href="/users/orders">
+              <div>
+                Orders
+              </div>
+            </a>
+            <% if (user.certified_merchant) { %>
+              <a href="/sellers/account">
+                <div>
+                  Your merchant dashboard
+                </div>
+              </a>
+            <% } else { %>
+              <a href="/users/account">
+                <div>
+                  Your account
+                </div>
+              </a>
+            <% } %>
       </li>
       <li><a href="/users/get/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         

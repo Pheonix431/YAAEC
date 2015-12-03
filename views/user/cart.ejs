@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <% include ../partials/header %>
+  <% include ../partials/head %>
 </head>
 
 <body>
+<% include ../partials/navbar %>
+  <div class="container">
+    <h2>My cart<h2> 
+    <hr>
+    <% if (cart.length == 0) { %>
+      <div class="alert alert-warning">
+        <h4>You don't have any items in the cart, yet!</h4>
+      </div>
+    <% } else { %>
+      <% cart.forEach(function(item) { %> 
+        
+      <% } %>
+    <% } %>
+    
+  </div>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/drop.js"></script>
+  <script src="/javascripts/home.js"></script>
 </body>
 
 </html>
