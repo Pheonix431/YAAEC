@@ -11,6 +11,11 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 /* GET users listing. */
 router.get('/signup', function(req,res){
   res.render('user/signup');
@@ -53,11 +58,13 @@ router.post('/login', function(req,res,next) {
   })(req,res,next);
 });
 
-router.get("/get/cart", isLoggedIn, function(req ,res, next){
-  return res.json(req.user.cart);
+router.get("/get/cart", isLoggedIn, function(req ,res, next) {
+  User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
+    return res.render("user/cart", { cart: req.user.cart });
+  });
 });
 
-router.post('/add/cart', isLoggedIn, function(req, res, next){
+router.post('/add/cart', isLoggedIn, function(req, res, next) {
   Item.find({"_id": req.body.id }, function(err, item){
     req.user.cart.push(item.id);
     req.user.save();
