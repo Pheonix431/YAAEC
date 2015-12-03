@@ -60,12 +60,12 @@ router.post('/login', function(req,res,next) {
 
 router.get("/get/cart", isLoggedIn, function(req ,res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
-    return res.render("user/cart", { cart: req.user.cart, user: req.user });
+    return res.render("user/cart", { cart: cart_items.cart, user: req.user });
   });
 });
 
 router.post('/add/cart', isLoggedIn, function(req, res, next) {
-  Item.find({"_id": req.body.id }, function(err, item){
+  Item.findOne({"_id": req.body.id }, function(err, item) {
     req.user.cart.push(item.id);
     req.user.save();
     return res.json(req.user);
