@@ -1,4 +1,4 @@
-var app = angular.module("app", ['notificationModule']);
+var app = angular.module("app", []);
 
 app.controller("home", function($scope, $http){
   $http.get('/get/all').success(function(data){

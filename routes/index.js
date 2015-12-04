@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', function(req, res, next) {
-  Item.search({query: req.body.q }, function(err, results){
-    return res.json(results);
+  Item.find({name: new RegExp(req.query.q, 'i')}, function(err, results) {
+    return res.render('search_results', { user: req.user, search_result: results });
   });
 });
 

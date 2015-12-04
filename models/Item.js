@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var mongoosastic = require("mongoosastic");
+var search = require("mongoose-text-search");
 
 var ItemSchema = new mongoose.Schema({
   name: { type: String, es_indexed: true },
@@ -18,10 +19,12 @@ var ItemSchema = new mongoose.Schema({
   additional_desc: {}
 });
 
-ItemSchema.plugin(mongoosastic);
+ItemSchema.plugin(search);
+
+ItemSchema.index({name: 'text'});
 var Item = mongoose.model("Item", ItemSchema);
 
-Item.createMapping(function(err, mapping){
+/*Item.createMapping(function(err, mapping){
   if (err) {
     console.log('error creating mapping (you can safely ignore this)');
     console.log(err);
@@ -31,4 +34,4 @@ Item.createMapping(function(err, mapping){
   }
 });
 
-
+*/
