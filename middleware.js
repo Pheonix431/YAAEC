@@ -30,7 +30,7 @@ module.exports = {
       }
       if (!user.customer_details) {
         req.flash("message", "You have no credit/debit card on this account. Please add one.")
-        return res.redirect("/add/card");
+        return res.redirect("/users/add/card");
       }
       return next();
     });

@@ -10,6 +10,32 @@
 
   <% include ./partials/navbar %>
 
+  <div class="container">
+    <h2>Checkout<h2> 
+    <hr>
+    <% if (items.length == 0) { %>
+      <div class="alert alert-warning">
+        <h4>You don't have any items in the cart, yet!</h4>
+      </div>
+    <% } else { %>
+      <div class="row">
+        <% items.forEach(function(item) { %> 
+          <div class="col-md-3">
+            <div class="thumbnail">
+              <img class="" src="<%= item.static_data.img_url %>" style="cursor:pointer;height:200px;"/>
+              <div class="caption">
+                  <h4><a href="#"> <%= item.name %></a></h4>
+                  <h4 class="pull-right">$24.99</h4>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <a href="/users/checkout"><button class="btn btn-primary">Checkout</button></a>
+    <% } %>
+    
+  </div>
+
 </body>
 
 </html>

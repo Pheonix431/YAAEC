@@ -66,6 +66,19 @@ router.get("/get/cart", middleware.isLoggedIn, function(req ,res, next) {
   });
 });
 
+router.get("/add/card", middleware.isLoggedIn, function(req, res, next) {
+  return res.render("add_card");
+});
+
+router.get("/checkout", middleware.isLoggedIn, function(req, res, next) {
+  User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
+    return res.render("checkout", {user: req.user, items: cart_items.cart} );
+  });
+});
+
+router.post("/checkout", middleware.isLoggedIn, function(req, res, next) {
+});
+
 router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   Item.findOne({"_id": req.body.id }, function(err, item) {
     req.user.cart.push(item.id);
@@ -74,12 +87,40 @@ router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get("/checkout", middleware.isLoggedIn, middleware.hasCard, function(req, res, next) {
-  return res.render("checkout");
-});
 
-router.post("/checkout", middleware.isLoggedIn, middleware.hasCard, function(req, res, next) {
-});
 
+
+router.post("/add/card", function(req, res, next){
+  stripe.customers.create({
+    description: "Customer for " + req.user.local.email,
+    source: req.body.customerToken
+  }, function(err, customer){
+    if (err){
+      console.log("err");
+      return res.status(406).json(err.raw.code);
+    }
+    console.log("Customer detail..");
+    var metadata = customer.sources.data[0];
+    var errors = {};
+
+    metadata.address_line1_check == 'fail' ? (errors["address1"] = true) : (console.log("Check"))
+    metadata.address_zip_check == 'fail' ? (errors["zip"] = true) : (console.log("Check"))
+
+    if (Object.keys(errors).length > 0){
+      stripe.customers.del(
+        customer.id,
+        function(err, confirmation) {
+        }
+      );
+      return res.status(406).json(errors);
+    }
+
+    req.user.customer_details = customer;
+    req.user.customer_id = customer.id;
+    req.user.markModified("customer_details");
+    req.user.save();
+    return res.json(req.user);
+  });
+});
 
 module.exports = router;

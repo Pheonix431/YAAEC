@@ -86,7 +86,7 @@
 
                 <div class="row" ng-app="home" ng-controller="products">
 
-                    <div class="" style="width:200px;float:left;"ng-repeat="item in items">
+                    <div class="" style="width:250px;float:left;"ng-repeat="item in items">
                         <div class="thumbnail">
                             <img src="{{ item.static_data.img_url }}" alt="">
                             <div class="caption">
@@ -97,6 +97,7 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
+                    <h4 class="pull-left"><span ng-click="addToCart(item._id)" class="glyphicon glyphicon-shopping-cart" style="cursor:pointer"></span></h4>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -107,9 +108,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
 
             </div>
