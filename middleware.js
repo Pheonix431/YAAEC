@@ -1,10 +1,22 @@
+var mongoose = require("mongoose");
+require('./models/User');
+require('./models/Item');
+require('./models/Seller');
+var User = mongoose.model("User");
+var Item = mongoose.model("Item");
+var Seller = mongoose.model("Seller");
 
 
 
 module.exports = {
-  isLoggedIn: function(req, res, next){
-    if (req.isAuthenticated()){
+  isLoggedIn: function(req, res, next) {
+    if (req.isAuthenticated()) {
+      if (req.user.is_seller) {
+        req.flash("signupMessage", "You are already a merchant!");
+        return res.redirect("/");
+      } else {
       return next();
+      }
     } else {
       req.flash("signupMessage", "You are not logged in!");
       return res.redirect("/");
@@ -29,8 +41,8 @@ module.exports = {
     });
   },
   isMerchant: function(req, res, next) {
-    User.findOne({"_id": req.user.id }).populate("user")
-      .exec(function(err, merch){
+    Seller.findOne({"_id": req.user.id }).populate("user")
+      .exec(function(err, merch) {
         if (!merch) {
           req.flash("signupMessage", "You are not merchant!");
           return res.redirect("/");

@@ -23,11 +23,15 @@ router.get("/dashboard", function(req, res, next) {
 router.get("/sold", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
 });
 
+router.get("/add/card", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+  return res.render("seller/add_card");
+});
+
 router.get("/signup", middleware.isLoggedIn, function(req ,res, next) {
   return res.render("seller/seller_signup");
 });
 
-router.post("/signup", middleware.isLoggedIn, function(res, res, next){
+router.post("/signup", middleware.isLoggedIn, function(req, res, next){
   var newSeller = new Seller();
 
   newSeller.company.contact.address = {
@@ -37,17 +41,23 @@ router.post("/signup", middleware.isLoggedIn, function(res, res, next){
     country: req.body.country
   };
 
+  debugger;
+
   newSeller.company.contact.email = (req.body.email) ? req.body.email : req.user.local.email;
   newSeller.company.contact.mobile = req.body.phone;
   newSeller.company.name = req.body.name;
 
   newSeller.user = req.user.id;
   req.user.is_seller = true;
+  debugger;
 
   newSeller.save(function(err) {
+    if (err){
+      return next(err);
+    }
     req.user.save();
     
-    return res.redirect("/sellers/dashboard");
+    return res.redirect("/sellers/add/card");
   });
 });
 
