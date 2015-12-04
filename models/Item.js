@@ -13,6 +13,7 @@ var ItemSchema = new mongoose.Schema({
   UPC: String,
   item_description: String,
   product_specification: {},
+  items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
   additional_desc: {}
 });
 

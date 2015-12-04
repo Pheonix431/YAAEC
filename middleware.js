@@ -45,7 +45,6 @@ module.exports = {
           req.user = merch;
           return next();
         }
-        
       });
   }
 }

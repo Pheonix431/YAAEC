@@ -19,6 +19,7 @@
     "grunt-contrib-less": "^1.1.0",
     "grunt-contrib-watch": "^0.6.1",
     "jit-grunt": "^0.9.1",
+    "mongoosastic": "^3.6.0",
     "mongoose": "^4.1.12",
     "morgan": "~1.5.3",
     "nodemailer": "^1.8.0",
