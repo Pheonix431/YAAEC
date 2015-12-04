@@ -12,6 +12,7 @@ var UserSchema = new mongoose.Schema({
   active: { type: Boolean, default: false },
   token: String,
   phone: Number,
+  bids: {[ type: mongoose.Schema.Types.ObjectId, ref: 'Bid' }],
   loyalty_points: Number,
   card : {} // don't worry about this, this is jus
 }); 

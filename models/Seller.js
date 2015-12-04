@@ -11,10 +11,10 @@ var Seller_Schema = new mongoose.schema({
     },
     name: String
   }, 
-  products: { type: mongoose.Schema.Types.ObjjectId, ref: "Item" },
+  products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
   rating: Number,
 });
 
-mongoose.model('Seller',Seller_Schema);
+mongoose.model('Seller', Seller_Schema);
 
 

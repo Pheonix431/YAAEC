@@ -10,7 +10,10 @@ var ItemSchema = new mongoose.Schema({
   currency: String,
   quantity: Number,
   condition: String,
+  UPC: String,
   item_description: String
+  product_specification: {},
+  additional_desc: {}
 });
 
 mongoose.model("Item", ItemSchema);
