@@ -3,7 +3,7 @@ var mongoosastic = require("mongoosastic");
 var search = require("mongoose-text-search");
 
 var ItemSchema = new mongoose.Schema({
-  name: { type: String, es_indexed: true },
+  name: { type: String },
   static_data: {
     img_url: String
   },
@@ -13,7 +13,7 @@ var ItemSchema = new mongoose.Schema({
   quantity: Number,
   condition: String,
   UPC: String,
-  item_description: { type: String, es_indexed: true },
+  item_description: { type: String  },
   product_specification: {},
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
   additional_desc: {}

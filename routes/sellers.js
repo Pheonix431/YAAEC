@@ -33,7 +33,17 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
   newItem.condition = req.body.condition;
   newItem.static_data.img_url = req.body.image;
 
-  return res.render("seller/add_product", { user: req.user });
+  newItem.save(function(err) {
+    req.user.products.push(newItem.id);
+    req.user.save();
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "Product successfully submitted!");
+    return res.render('index', { success: req.flash("success")[0], failure: req.flash("signupMessage")[0], user: req.user });
+});
+
+
 });
 
 router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
