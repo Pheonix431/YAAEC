@@ -17,7 +17,7 @@ router.get('/test', function(req ,res ,next){
   return res.json(req.query.as);
 });
 
-router.get('/create', function(req, res ,next){
+router.get('/create', function(req, res ,next) {
   var newItem = new Item();
   newItem.name = req.query.name;
   newItem.brand = req.query.brand;
@@ -26,8 +26,8 @@ router.get('/create', function(req, res ,next){
   newItem.condition = req.query.condition;
   newItem.item_description = req.query.description;
 
-  newItem.save(function(err){
-    if (err){
+  newItem.save(function(err) {
+    if (err) {
       return next(err);
     }
     return res.json("SUCES");

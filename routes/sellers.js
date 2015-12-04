@@ -16,14 +16,22 @@ require('../models/Item');
 var Item = mongoose.model("Item");
 var User = mongoose.model("User");
 
+router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  return res.render("seller/orders", { user: req.user });
+});
+
+router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  return res.render("seller/add_product", { user: req.user });
+});
+
 router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
-  return res.render("seller/dashboard", {user: req.user} );
+  return res.render("seller/dashboard", { user: req.user } );
 });
 
 router.get("/sold", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
 });
 
-router.get("/add/card", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+router.get("/add/card", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/add_card");
 });
 
@@ -53,7 +61,6 @@ router.post("/signup", middleware.isLoggedIn, function(req, res, next){
 
   newSeller.user = req.user.id;
   req.user.is_seller = true;
-  debugger;
 
   newSeller.save(function(err) {
     if (err){
