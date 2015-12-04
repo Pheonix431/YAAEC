@@ -16,8 +16,8 @@ require('../models/Item');
 var Item = mongoose.model("Item");
 var User = mongoose.model("User");
 
-router.get("/dashboard", function(req, res, next) {
-  return res.render("seller/dashboard");
+router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  return res.render("seller/dashboard", {user: req.user} );
 });
 
 router.get("/sold", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
@@ -46,7 +46,6 @@ router.post("/signup", middleware.isLoggedIn, function(req, res, next){
     country: req.body.country
   };
 
-  debugger;
 
   newSeller.company.contact.email = (req.body.email) ? req.body.email : req.user.local.email;
   newSeller.company.contact.mobile = req.body.phone;

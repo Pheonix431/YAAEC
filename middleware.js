@@ -36,8 +36,9 @@ module.exports = {
     });
   },
   isMerchant: function(req, res, next) {
-    Seller.findOne({"_id": req.user.id }).populate("user")
+    Seller.findOne({"user": req.user.id }).populate("user")
       .exec(function(err, merch) {
+        debugger;
         if (!merch) {
           req.flash("signupMessage", "You are not merchant!");
           return res.redirect("/");
