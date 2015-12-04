@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
+var mongoosastic = require("mongoosastic");
 
 var ItemSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, es_indexed: true },
   static_data: {
     img_url: String
   },
@@ -11,11 +12,23 @@ var ItemSchema = new mongoose.Schema({
   quantity: Number,
   condition: String,
   UPC: String,
-  item_description: String,
+  item_description: { type: String, es_indexed: true },
   product_specification: {},
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
   additional_desc: {}
 });
 
-mongoose.model("Item", ItemSchema);
+ItemSchema.plugin(mongoosastic);
+var Item = mongoose.model("Item", ItemSchema);
+
+Item.createMapping(function(err, mapping){
+  if (err) {
+    console.log('error creating mapping (you can safely ignore this)');
+    console.log(err);
+  } else {
+    console.log('mapping created!');
+    console.log(mapping);
+  }
+});
+
 

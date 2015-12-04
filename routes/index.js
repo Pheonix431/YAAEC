@@ -13,7 +13,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { success: req.flash("success")[0], failure: req.flash("signupMessage")[0], user: req.user });
 });
 
-router.get('/test', function(req ,res ,next){
+router.get('/search', function(req, res, next) {
+  Item.search({query: req.body.q }, function(err, results){
+    return res.json(results);
+  });
+});
+
+router.get('/test', function(req ,res ,next) {
   return res.json(req.query.as);
 });
 
