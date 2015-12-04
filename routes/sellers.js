@@ -28,7 +28,12 @@ router.get("/add/card", middleware.isLoggedIn, middleware.isMerchant, function(r
 });
 
 router.get("/signup", middleware.isLoggedIn, function(req ,res, next) {
-  return res.render("seller/seller_signup");
+  if (req.user.is_seller) {
+    req.flash("signupMessage", "You are already a merchant!");
+    return res.redirect("/");
+  } else {
+    return res.render("seller/seller_signup");
+  }
 });
 
 router.post("/signup", middleware.isLoggedIn, function(req, res, next){

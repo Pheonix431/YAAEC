@@ -11,12 +11,7 @@ var Seller = mongoose.model("Seller");
 module.exports = {
   isLoggedIn: function(req, res, next) {
     if (req.isAuthenticated()) {
-      if (req.user.is_seller) {
-        req.flash("signupMessage", "You are already a merchant!");
-        return res.redirect("/");
-      } else {
       return next();
-      }
     } else {
       req.flash("signupMessage", "You are not logged in!");
       return res.redirect("/");
