@@ -12,11 +12,11 @@ module.exports = {
   },
   hasCard: function(req, res, next) {
     User.findOne({"_id":req.user.id}, function(err, user){
-      if (err){
+      if (err) {
         console.log(err);
         return next(err);
       }
-      if (!user){
+      if (!user) {
         console.log("User not found");
         req.flash("failure", "User not found!");
         return res.send(404);
@@ -28,12 +28,17 @@ module.exports = {
       return next();
     });
   },
-  isMerchant: function(req, res, next){
-    (!req.user.is_seller){
-      req.flash("signupMessage", "You are not merchant!");
-      return res.redirect("/");
-    } else {
-      return next();
-    }
+  isMerchant: function(req, res, next) {
+    User.findOne({"_id": req.user.id }).populate("user")
+      .exec(function(err, merch){
+        if (!merch) {
+          req.flash("signupMessage", "You are not merchant!");
+          return res.redirect("/");
+        } else {
+          req.user = merch;
+          return next();
+        }
+        
+      });
   }
 }

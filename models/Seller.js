@@ -12,6 +12,10 @@ var Seller_Schema = new mongoose.schema({
     name: String
   }, 
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
+  sold: [{ 
+    item: { type: mongoose.Schema.Types.ObjectId, ref: "Item" },
+    count: Number
+  }],
   rating: Number,
 });
 
