@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require("mongoose");
 
-require ('../models/Seller');
+require('../models/Seller');
 require('../models/User');
 require('../models/Item');
 var User = mongoose.model("User");
@@ -18,6 +18,10 @@ var User = mongoose.model("User");
 
 router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/orders", { user: req.user });
+});
+
+router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  return res.render("seller/view_products", {user: req.user});
 });
 
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
