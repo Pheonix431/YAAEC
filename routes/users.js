@@ -11,6 +11,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 
+var middleware = require("../middleware");
+
 router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
@@ -58,13 +60,13 @@ router.post('/login', function(req,res,next) {
   })(req,res,next);
 });
 
-router.get("/get/cart", isLoggedIn, function(req ,res, next) {
+router.get("/get/cart", middleware.isLoggedIn, function(req ,res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
     return res.render("user/cart", { cart: cart_items.cart, user: req.user });
   });
 });
 
-router.post('/add/cart', isLoggedIn, function(req, res, next) {
+router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   Item.findOne({"_id": req.body.id }, function(err, item) {
     req.user.cart.push(item.id);
     req.user.save();
@@ -72,13 +74,5 @@ router.post('/add/cart', isLoggedIn, function(req, res, next) {
   });
 });
 
-function isLoggedIn(req, res, next){
-  if (req.isAuthenticated()){
-    return next();
-  } else {
-    req.flash("signupMessage", "You are not logged in!");
-    return res.redirect("/");
-  }
-}
 
 module.exports = router;

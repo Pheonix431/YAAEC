@@ -11,7 +11,7 @@ var ItemSchema = new mongoose.Schema({
   quantity: Number,
   condition: String,
   UPC: String,
-  item_description: String
+  item_description: String,
   product_specification: {},
   additional_desc: {}
 });
