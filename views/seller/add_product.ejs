@@ -8,7 +8,39 @@
 
 <body>
   <% include ../partials/navbar %>
+<div class="col-sm-6 col-sm-offset-3">
+  <h2>Add a product</h2>
+  <form action="/sellers/add/product" method="post">
+      <div class="form-group signup" ng-controller="signup">
+        </br>
+        <h4>Product details</h4>
+          <div id="input_container">
+            <input class="form-control" type="text" ng-model="name" id="input" name="name" placeholder="name" style="">
+          </div>
+</br>
+          <div id="input_container">
+            <textarea class="form-control" type="text" ng-model="description" id="input" name="description" placeholder="description" style=""></textarea>
+          </div>
+</br>
+          <div id="input_container">
+            <input class="form-control" type="text" ng-model="price" id="input" name="price" placeholder="price" style="width:120px;">
+          </div>
+</br>
+          <div id="input_container">
+            <input type="text" class="form-control" ng-model="condition" name="condition" placeholder="Condition (eg. 'Good', 'Used', 'Mint')" style="">
+          </div>
+        <h4>Static data</h4>
+          <div id="input_container">
+            <input class="form-control" type="text" ng-model="image" id="input" name="image" placeholder="Image link" style="">
+          </div>
+      </div>
+      <div class="form-group">
+      </div>
 
+      <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+  </form>
+
+</div>
   <script src="/javascripts/drop.js"></script>
 </body>
 

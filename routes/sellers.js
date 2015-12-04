@@ -24,6 +24,18 @@ router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, functio
   return res.render("seller/add_product", { user: req.user });
 });
 
+router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  var newItem = new Item();
+  
+  newItem.name = req.body.name;
+  newItem.description = req.body.description;
+  newItem.price = req.body.price;
+  newItem.condition = req.body.condition;
+  newItem.static_data.img_url = req.body.image;
+
+  return res.render("seller/add_product", { user: req.user });
+});
+
 router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/dashboard", { user: req.user } );
 });
