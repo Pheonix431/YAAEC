@@ -74,5 +74,11 @@ router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   });
 });
 
+router.get("/checkout", middleware.isLoggedIn, middleware.hasCard, function(req, res, next){
+});
+
+router.post("/checkout", middleware.isLoggedIn, middleware.hasCard, function(req, res, next){
+});
+
 
 module.exports = router;
