@@ -16,12 +16,13 @@
     <% } else { %>
       <div class="row">
         <% cart.forEach(function(item) { %> 
-          <div class="col-sm-4 col-lg-4 col-md-4">
+          <div class="col-md-3">
             <div class="thumbnail">
-              <img class="thumbnail" src="<%= item.static_data.img_url %>" style="cursor:pointer"/>
+              <img class="" src="<%= item.static_data.img_url %>" style="cursor:pointer;height:200px;"/>
               <div class="caption">
                   <h4><a href="#"> <%= item.name %></a></h4>
                   <h4 class="pull-right">$24.99</h4>
+                  <h4 class="pull-left"><span class="glyphicon glyphicon-trash" style="cursor:pointer"></span></h4>
               </div>
             </div>
           </div>
