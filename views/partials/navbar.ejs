@@ -49,19 +49,18 @@
                 Orders
               </div>
             </a>
-            <% if (user.certified_merchant) { %>
-              <a href="/sellers/account">
+            <% if (user.is_seller) { %>
+              <a href="/sellers/dashboard">
                 <div>
                   Your merchant dashboard
                 </div>
               </a>
-            <% } else { %>
+            <% } %>
               <a href="/users/account">
                 <div>
                   Your account
                 </div>
               </a>
-            <% } %>
       </li>
       <li><a href="/users/get/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         
