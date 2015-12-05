@@ -38,7 +38,7 @@ module.exports = function(passport){
         if (user && !user.active){
           return done(null,false, req.flash('signupMessage', 'You are already registered with this email but it is not yet active. Please confirm your email')); 
         }
-        else if (user){
+        else if (user) {
           return done(null, false, req.flash('signupMessage', 'That email is already taken'));
         } else {
           var newUser = new User();
@@ -74,16 +74,16 @@ module.exports = function(passport){
   function(req,username,password,done){
     process.nextTick(function(){
       User.findOne({$or:[{'local.username':username}, {'local.email':username}]}, function(err, user){
-        if (err){
+        if (err) {
           return done(err);
         }
-        if (!user){
+        if (!user) {
           return done(null, false);
         }
         if (!user.validPassword(password)){
           return done(null, false);
         }
-        if (user.active){
+        if (user.active) {
           return done(null, user);
         } else {
           return done(null, user);
