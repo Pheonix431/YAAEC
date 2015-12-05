@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
   token: String,
   phone: Number,
   bids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bid' }],
-  purchased: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }]
+  purchased: [{ type: mongoose.Schema.Types.ObjectId }],
   is_seller: { type: Boolean, default: false },
   loyalty_points: Number,
   card : {} // don't worry about this, this is jus
