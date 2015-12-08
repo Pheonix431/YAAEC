@@ -15,22 +15,23 @@ require('../models/User');
 require('../models/Item');
 var Item = mongoose.model("Item");
 
-router.get('/product/:productID',function(req ,res, next) {
-res.render('Product')
-});
-
-router.get('/product/get/:productID',function(req ,res, next){
-
-Item.findById(req.params.productID, function(err,product){
-   if (err){
+router.param('product_id', function(req, res, next) {
+  Item.findById(req.params.product_id, function(err, prod) {
+    if (err) {
       return next(err);
-   }
-   if (!product){
+    }
+    if (!prod) {
       return res.send(404, "Not found");
-   }
-   return res.json(product);
-})
+    }
+    req.product = prod;
+    return next();
+  });
+});
+
+router.get('/:product_id', function(req ,res, next) {
+    return res.render('product', { product: JSON.stringify(req.product), user: req.user });
 });
 
 
 
+module.exports = router;
