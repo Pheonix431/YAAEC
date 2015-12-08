@@ -28,6 +28,12 @@ router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, functio
   return res.render("seller/add_product", { user: req.user });
 });
 
+router.get('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+  Item.findById(req.params.product_id, (function(err, product){
+    return res.render("seller/edit_product", { product: product, user: req.user });
+  } 
+}
+
 router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   var newItem = new Item();
   
