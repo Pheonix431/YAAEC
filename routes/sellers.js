@@ -19,11 +19,9 @@ var User = mongoose.model("User");
 router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/orders", { user: req.user });
 });
-
+(
 router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
-  Seller.findById(req.user.id).populate("products").exec(function(err, seller) {
-    return res.render("seller/view_products", { products : seller.products, user: req.user});
-  });
+  return res.render("seller/view_products", { products : req.user.products, user: req.user.user });
 });
 
 router.get('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
