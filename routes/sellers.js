@@ -21,18 +21,15 @@ router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req
 });
 
 router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
-  return res.render("seller/view_products", {user: req.user});
+
+  Seller.findById(req.user.id).populate("products").exec(function(req,res, next){
+      return res.render("seller/view_products", { products:products ,user: req.user});
 });
 
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/add_product", { user: req.user });
 });
 
-router.get('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
-  Item.findById(req.params.product_id, (function(err, product){
-    return res.render("seller/edit_product", { product: product, user: req.user });
-  } 
-}
 
 router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   var newItem = new Item();
@@ -41,6 +38,7 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
   newItem.description = req.body.description;
   newItem.price = req.body.price;
   newItem.condition = req.body.condition;
+  newItem.quantity = req.body.quantity;
   newItem.static_data.img_url = req.body.image;
 
   newItem.save(function(err) {
@@ -55,7 +53,6 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
 
 
 });
-
 router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/dashboard", { user: req.user } );
 });
@@ -105,4 +102,3 @@ router.post("/signup", middleware.isLoggedIn, function(req, res, next){
 });
 
 module.exports = router;
-

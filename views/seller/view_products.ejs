@@ -4,13 +4,49 @@
 <head>
   <% include ../partials/head %>
   <title>Hello World E-commerce</title>
+  <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        table
+        {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        table th
+        {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+        table th, table td
+        {
+            padding: 5px;
+            border-color: #ccc;
+        }
+    </style>
 </head>
 
 <body>
+<script>
+   window.app = <%- JSON.stringify(products) %>
+</script>
   <% include ../partials/navbar %>
+<div class="col-sm-6 col-sm-offset-3">
+  <h2>View all products </h2>
+ 
+  <table>
+<% for(var i=0; i < products.length; i++) { %>
+   <tr>
+     <td><%= products[i].id %></td>
+     <td><%= products[j].name %></td>
+   </tr>
+<% } %>
+</table>
+                
 
+</div>
   <script src="/javascripts/drop.js"></script>
 </body>
-
-</html>
-
