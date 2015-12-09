@@ -38,12 +38,11 @@
   <h2>View all products </h2>
  
   <table>
-<% for(var i=0; i < products.length; i++) { %>
+    <% products.forEach(function(product) { %>
    <tr>
-     <td><%= products[i].id %></td>
-     <td><%= products[j].name %></td>
+     <td><%= product.name %></td>
    </tr>
-<% } %>
+<% }); %>
 </table>
                 
 
