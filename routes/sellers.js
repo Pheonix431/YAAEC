@@ -21,7 +21,9 @@ router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req
 });
 
 router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
-  return res.render("seller/view_products", {user: req.user});
+
+  Seller.findById(req.user.id).populate("products").exec(function(req,res, next){
+      return res.render("seller/view_products", { products:products ,user: req.user});
 });
 
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
