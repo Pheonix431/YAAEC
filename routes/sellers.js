@@ -36,6 +36,7 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
   newItem.description = req.body.description;
   newItem.price = req.body.price;
   newItem.condition = req.body.condition;
+  newItem.quantity = req.body.quantity;
   newItem.static_data.img_url = req.body.image;
 
   newItem.save(function(err) {
