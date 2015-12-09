@@ -26,6 +26,12 @@ router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, functi
   });
 });
 
+router.get('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  Item.findById(req.params.product_id, function(err, product) {
+    return res.render("seller/edit_product", { product: product, user: req.user });
+  });
+ });
+
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/add_product", { user: req.user });
 });

@@ -72,7 +72,7 @@ router.get("/add/card", middleware.isLoggedIn, function(req, res, next) {
 
 router.get("/checkout", middleware.isLoggedIn, function(req, res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
-    return res.render("checkout", {user: req.user, items: cart_items.cart} );
+    return res.render("checkout", {user: req.user, items: JSON.stringify(cart_items.cart) });
   });
 });
 
