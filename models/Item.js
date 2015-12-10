@@ -16,6 +16,7 @@ var ItemSchema = new mongoose.Schema({
   item_description: { type: String  },
   product_specification: {},
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
   additional_desc: {}
 });
 

@@ -11,7 +11,9 @@ var config = common.config();
 
 
 require('./models/User');
+require('./models/Review');
 var User = mongoose.model("User");
+var Review = mongoose.model("Review");
 mongoose.connect(config.mongo);
 
 var routes = require('./routes/index');

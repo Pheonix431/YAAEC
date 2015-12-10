@@ -83,7 +83,7 @@ router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   Item.findOne({"_id": req.body.id }, function(err, item) {
     req.user.cart.push(item.id);
     req.user.save();
-    return res.json(req.user);
+    return res.redirect("/users/get/cart");
   });
 });
 
@@ -94,12 +94,12 @@ router.delete("/delete/cart/:id", middleware.isLoggedIn, function(req, res, next
   return res.send(200);
 });
 
-router.post("/add/card", function(req, res, next){
+router.post("/add/card", function(req, res, next) {
   stripe.customers.create({
     description: "Customer for " + req.user.local.email,
     source: req.body.customerToken
-  }, function(err, customer){
-    if (err){
+  }, function(err, customer) {
+    if (err) {
       console.log("err");
       return res.status(406).json(err.raw.code);
     }
@@ -110,7 +110,7 @@ router.post("/add/card", function(req, res, next){
     metadata.address_line1_check == 'fail' ? (errors["address1"] = true) : (console.log("Check"))
     metadata.address_zip_check == 'fail' ? (errors["zip"] = true) : (console.log("Check"))
 
-    if (Object.keys(errors).length > 0){
+    if (Object.keys(errors).length > 0) {
       stripe.customers.del(
         customer.id,
         function(err, confirmation) {
