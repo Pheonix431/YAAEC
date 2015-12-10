@@ -6,35 +6,31 @@
 
 <body>
 <% include ../partials/navbar %>
-  <div class="container">
+<script> x = <%- cart %></script>
+  <div class="container" ng-app="cart" ng-controller="something">
     <h2>My cart<h2> 
     <hr>
-    <% if (cart.length == 0) { %>
-      <div class="alert alert-warning">
-        <h4>You don't have any items in the cart, yet!</h4>
-      </div>
-    <% } else { %>
-      <div class="row">
-        <% cart.forEach(function(item) { %> 
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img class="" src="<%= item.static_data.img_url %>" style="cursor:pointer;height:200px;"/>
-              <div class="caption">
-                  <h4><a href="#"> <%= item.name %></a></h4>
-                  <h4 class="pull-right">$24.99</h4>
-                  <h4 class="pull-left"><span class="glyphicon glyphicon-trash" style="cursor:pointer"></span></h4>
-              </div>
+    <div ng-if="items.length == 0" class="alert alert-warning">
+      <h4>You don't have any items in the cart, yet!</h4>
+    </div>
+    <div class="row"  ng-repeat="item in items">
+        <div class="col-md-3">
+          <div class="thumbnail">
+            <img class="" src="{{ item.static_data.img_url }}" style="cursor:pointer;height:200px;"/>
+            <div class="caption">
+              <h4><a href="/product/{{ item._id }}">{{ item.name }}</a></h4>
+                <h4 class="pull-right">${{ item.price }}</h4>
+                <h4 class="pull-left"><span class="glyphicon glyphicon-trash" ng-click="deleteItem(item._id)" style="cursor:pointer"></span></h4>
             </div>
           </div>
-        <% }); %>
+        </div>
       </div>
-      <a href="/users/checkout"><button class="btn btn-primary">Proceed to checkout</button></a>
-    <% } %>
+      <a ng-if="items.length > 0" href="/users/checkout"><button class="btn btn-primary">Proceed to checkout</button></a>
     
   </div>
+  <script src="/javascripts/cart.js"></script>
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/drop.js"></script>
-  <script src="/javascripts/home.js"></script>
 </body>
 
 </html>

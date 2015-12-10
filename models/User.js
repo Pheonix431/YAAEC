@@ -11,6 +11,7 @@ var UserSchema = new mongoose.Schema({
   },
   active: { type: Boolean, default: false },
   token: String,
+  shipping_address:{ address1: String, address2: String, city: String, state: String, zipcode: String},
   phone: Number,
   bids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bid' }],
   purchased: [{ type: mongoose.Schema.Types.ObjectId }],

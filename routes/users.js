@@ -62,7 +62,7 @@ router.post('/login', function(req,res,next) {
 
 router.get("/get/cart", middleware.isLoggedIn, function(req ,res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
-    return res.render("user/cart", { cart: cart_items.cart, user: req.user });
+    return res.render("user/cart", { cart: JSON.stringify(cart_items.cart), user: req.user });
   });
 });
 
@@ -72,7 +72,7 @@ router.get("/add/card", middleware.isLoggedIn, function(req, res, next) {
 
 router.get("/checkout", middleware.isLoggedIn, function(req, res, next) {
   User.populate(req.user, {path: 'cart'}, function(err, cart_items) {
-    return res.render("checkout", {user: req.user, items: JSON.stringify(cart_items.cart) });
+    return res.render("checkout", { user: JSON.stringify(req.user), items: JSON.stringify(cart_items.cart) });
   });
 });
 
@@ -87,8 +87,12 @@ router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
   });
 });
 
-
-
+router.delete("/delete/cart/:id", middleware.isLoggedIn, function(req, res, next) {
+  req.user.cart.remove(req.params.id);
+  req.user.save();
+  
+  return res.send(200);
+});
 
 router.post("/add/card", function(req, res, next){
   stripe.customers.create({

@@ -19,7 +19,7 @@ var User = mongoose.model("User");
 router.get("/orders", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/orders", { user: req.user });
 });
-(
+
 router.get("/products/all", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/view_products", { products : req.user.products, user: req.user.user });
 });
