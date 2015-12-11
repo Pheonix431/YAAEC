@@ -16,7 +16,7 @@ require('../models/Item');
 var Item = mongoose.model("Item");
 
 router.param('product_id', function(req, res, next) {
-  Item.findById(req.params.product_id).populate("reviews reviews.user").exec(function(err, prod) {
+  Item.findById(req.params.product_id).populate("reviews reviews.user").exec(function(err, prod){
     if (err) {
       return next(err);
     }

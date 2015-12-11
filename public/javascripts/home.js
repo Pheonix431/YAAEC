@@ -9,7 +9,7 @@ app.controller("products", function($scope, $http){
 
   $scope.addToCart = function(product_id){
     $http.post('/users/add/cart', { id: product_id })
-      .success(function(data){
+      .success(function(data) {
         window.location = "/users/get/cart";
       })
       .error(function(){

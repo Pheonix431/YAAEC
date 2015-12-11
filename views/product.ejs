@@ -24,7 +24,6 @@
             </div>
 
             <div class="col-md-9">
-
                 <div class="thumbnail">
                     <img class="" style="width:30%;" class="img-responsive" src="{{ product.static_data.img_url }}" alt="">
                     <div class="caption-full">
@@ -34,14 +33,13 @@
                         <p>{{ product.item_description }}</p>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
+                      <p class="pull-right"> {{ reviews.length }} {{ reviews.length > 1 ? 'reviews' : 'review'  }}</p>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
                         </p>
                     </div>
                 </div>
@@ -49,10 +47,10 @@
                 <div class="well">
 
                     <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
+                        <a ng-click="showForm = true" ng-hide="showForm" class="btn btn-success">Leave a Review</a>
                     </div>
 
-                    <h2 style="text-align:center;"> No reviews </h2>
+                    <h2 ng-if="!reviews" ng-hide="showForm" style="text-align:center;"> No reviews </h2>
                     <hr>
 
                     <div class="row" ng-repeat="review in reviews">
@@ -67,7 +65,24 @@
                             <p> {{ review.content }}</p>
                         </div>
                     </div>
-
+                    <form ng-show="showForm" action="/users/submit/review" method="POST">
+                      <textarea type="text" class="form-control" placeholder="Add a review..." name="content"></textarea>
+                        <div class="col-md-12">
+                          </br>
+                          </br>
+                          <label>Rating (1 - 5)</label>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          </br>
+                          </br>
+                        </div>
+                      <input type="hidden" name="product_id" value="{{ product._id }}"></input>
+                      </br>
+                      <button type="submit" class="btn btn-warning">submit</button>
+                    </form>
                     <hr>
                 </div>
 

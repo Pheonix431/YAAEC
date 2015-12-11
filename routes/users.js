@@ -4,8 +4,10 @@ var passport = require("passport");
 //models
 require('../models/User');
 require('../models/Item');
+require('../models/Review');
 var User = mongoose.model("User");
 var Item = mongoose.model("Item");
+var Review = mongoose.model("Review");
 
 var express = require('express');
 var router = express.Router();
@@ -13,7 +15,7 @@ var passport = require("passport");
 
 var middleware = require("../middleware");
 
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
@@ -94,7 +96,31 @@ router.delete("/delete/cart/:id", middleware.isLoggedIn, function(req, res, next
   return res.send(200);
 });
 
-router.post("/add/card", function(req, res, next) {
+router.post("/submit/review", middleware.isLoggedIn, function(req, res, next){
+  var desc = req.body.content;
+  var stars = req.body.stars;
+
+  debugger;
+  Item.findById(req.body.product_id).exec(function(err, item) {
+    if (!item) {
+      return res.send(404, "Not found");
+    }
+
+    var newReview = new Review({
+      content: desc,
+      user: req.user._id
+    });
+
+    item.reviews.push(newReview);
+    item.save(function(err){
+      newReview.save();
+      return res.redirect("/product/"+req.body.product_id);
+    });
+  });
+  
+});
+
+router.post("/add/card", middleware.isLoggedIn, function(req, res, next) {
   stripe.customers.create({
     description: "Customer for " + req.user.local.email,
     source: req.body.customerToken
