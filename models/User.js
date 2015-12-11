@@ -17,7 +17,10 @@ var UserSchema = new mongoose.Schema({
   purchased: [{ type: mongoose.Schema.Types.ObjectId }],
   is_seller: { type: Boolean, default: false },
   loyalty_points: Number,
-  card : {} // don't worry about this, this is jus
+  card : {}, // don't worry about this, this is jus
+  customer_details: {},
+  card: {},
+  customer_id: String
 }); 
 
 UserSchema.methods.generateHash = function(password) {

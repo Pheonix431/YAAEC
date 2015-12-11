@@ -11,6 +11,7 @@ var Review = mongoose.model("Review");
 
 var express = require('express');
 var router = express.Router();
+var stripe = require("stripe")("sk_test_1g2cPSZxcKd3B2dP6ef9VTjI");
 var passport = require("passport");
 
 var middleware = require("../middleware");
@@ -78,7 +79,8 @@ router.get("/checkout", middleware.isLoggedIn, function(req, res, next) {
   });
 });
 
-router.post("/checkout", middleware.isLoggedIn, function(req, res, next) {
+router.post("/checkout", middleware.isLoggedIn, middleware.hasCard, function(req, res, next) {
+  
 });
 
 router.post('/add/cart', middleware.isLoggedIn, function(req, res, next) {
@@ -100,7 +102,6 @@ router.post("/submit/review", middleware.isLoggedIn, function(req, res, next){
   var desc = req.body.content;
   var stars = req.body.stars;
 
-  debugger;
   Item.findById(req.body.product_id).exec(function(err, item) {
     if (!item) {
       return res.send(404, "Not found");

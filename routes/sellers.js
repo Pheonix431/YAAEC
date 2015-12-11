@@ -30,6 +30,28 @@ router.get('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerc
   });
  });
 
+router.post('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
+  Item.findById(req.params.product_id, function(err, product) {
+    product.name = req.body.name;
+    product.item_description = req.body.description;
+    product.price = req.body.price;
+    product.condition = req.body.condition;
+    product.quantity = req.body.quantity;
+    product.static_data.img_url = req.body.image;
+
+    product.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/product/' + product._id);
+    });
+  });
+});
+
+router.get('/edit/products', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+  return res.render("seller/view_products_edit.ejs", { user: req.user.user, products: req.user.products });
+});
+
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/add_product", { user: req.user });
 });
@@ -39,7 +61,7 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
   var newItem = new Item();
   
   newItem.name = req.body.name;
-  newItem.description = req.body.description;
+  newItem.item_description = req.body.description;
   newItem.price = req.body.price;
   newItem.condition = req.body.condition;
   newItem.quantity = req.body.quantity;
@@ -51,9 +73,8 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
     if (err) {
       return next(err);
     }
-    req.flash("success", "Product successfully submitted!");
-    return res.render('index', { success: req.flash("success")[0], failure: req.flash("signupMessage")[0], user: req.user });
-});
+    return res.redirect('/product/' + newItem._id);
+  });
 
 
 });

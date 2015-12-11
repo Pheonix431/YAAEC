@@ -10,7 +10,7 @@
 <div class="col-sm-6 col-sm-offset-3">
   <h2>Edit a product</h2>
  
-  <form action="/sellers/edit/product" method="post">
+  <form action="/sellers/edit/<%= product._id %>/product" method="post">
       <div class="form-group signup" ng-controller="signup">
         </br>
         <h4>Product details</h4>
@@ -19,22 +19,22 @@
           </div>
 </br>
           <div id="input_container">
-            <textarea class="form-control" type="text" ng-model="description" id="input" name="description" placeholder="description" style=""></textarea>
+            <textarea class="form-control" type="text" ng-model="description" value="<%= product.description %>" id="input" name="description" placeholder="description" style=""></textarea>
           </div>
 </br>
           <div id="input_container">
-            <input class="form-control" type="text" ng-model="price" id="input" name="price" placeholder="price" style="width:120px;">
+            <input class="form-control" type="text" ng-model="price" id="input" name="price" value="<%= product.price %>" placeholder="price" style="width:120px;">
           </div>
 </br>
           <div id="input_container">
-            <input type="text" class="form-control" ng-model="condition" name="condition" placeholder="Condition (eg. 'Good', 'Used', 'Mint')" style="">
+            <input type="text" class="form-control" ng-model="condition" name="condition" value="<%= product.condition %>" placeholder="Condition (eg. 'Good', 'Used', 'Mint')" style="">
           </div>
             <br>
           <input type="radio" name="type" value="buy" checked>  Buy only
           <input type="radio" name="type" value="auction">      Auction 
         <h4>Static data</h4>
           <div id="input_container">
-            <input class="form-control" type="text" ng-model="image" id="input" name="image" placeholder="Image link" style="">
+            <input class="form-control" type="text" ng-model="image" id="input" value="<%= product.static_data.img_url %>" name="image" placeholder="Image link" style="">
           </div>
       </div>
       <div class="form-group">

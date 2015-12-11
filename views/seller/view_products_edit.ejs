@@ -46,7 +46,7 @@
             <img src="<%= product.static_data.img_url %>" alt="">
               <div class="caption">
                 <h4>
-                  <p><%= product.name %></p>
+                  <a href="/sellers/edit/<%= product._id %>/product"><p><%= product.name %></p></a>
                 </h4>
               </div>
           </div>
@@ -56,3 +56,4 @@
 </div>
   <script src="/javascripts/drop.js"></script>
 </body>
+

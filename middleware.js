@@ -36,7 +36,7 @@ module.exports = {
     });
   },
   isMerchant: function(req, res, next) {
-    Seller.findOne({"user": req.user.id }).populate("user")
+    Seller.findOne({"user": req.user.id }).populate("user products")
       .exec(function(err, merch) {
         if (!merch) {
           req.flash("signupMessage", "You are not merchant!");

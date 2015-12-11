@@ -30,16 +30,16 @@
                         <h4 class="pull-right">${{ product.price }}</h4>
                         <h4><a href="#"> {{ product.name }}</a>
                         </h4>
-                        <p>{{ product.item_description }}</p>
+                        <p>{{ product.description}}</p>
                     </div>
                     <div class="ratings">
                       <p class="pull-right"> {{ reviews.length }} {{ reviews.length > 1 ? 'reviews' : 'review'  }}</p>
                         <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star-empty"></span>
                         </p>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <a ng-click="showForm = true" ng-hide="showForm" class="btn btn-success">Leave a Review</a>
                     </div>
 
-                    <h2 ng-if="!reviews" ng-hide="showForm" style="text-align:center;"> No reviews </h2>
+                    <h2 ng-hide="showForm" style="text-align:center;"> No reviews </h2>
                     <hr>
 
                     <div class="row" ng-repeat="review in reviews">
@@ -71,11 +71,11 @@
                           </br>
                           </br>
                           <label>Rating (1 - 5)</label>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
+                          <span ng-click="rating = 1" class="glyphicon glyphicon-star"></span>
+                          <span ng-click="rating = 2" class="glyphicon glyphicon-star"></span>
+                          <span ng-click="rating = 3" class="glyphicon glyphicon-star"></span>
+                          <span ng-click="rating = 4" class="glyphicon glyphicon-star"></span>
+                          <span ng-click="rating = 5" class="glyphicon glyphicon-star"></span>
                           </br>
                           </br>
                         </div>
