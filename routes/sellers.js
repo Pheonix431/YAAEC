@@ -49,11 +49,21 @@ router.post('/edit/:product_id/product', middleware.isLoggedIn, middleware.isMer
 });
 
 router.get('/edit/products', middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
-  return res.render("seller/view_products_edit.ejs", { user: req.user.user, products: req.user.products });
+  return res.render("seller/view_products_edit", { user: req.user.user, products: req.user.products });
 });
 
 router.get("/add/product", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/add_product", { user: req.user });
+});
+
+router.get("/add/item", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+  return res.render("seller/add_item", { user: req.user, products: req.user.products });
+});
+
+router.get("/add/:product_id/item", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next){
+  Item.findById(req.params.product_id, function(err, product) {
+    return res.render("seller/item_add", { user: req.user.user, product: product });
+  });
 });
 
 
@@ -75,9 +85,8 @@ router.post("/add/product", middleware.isLoggedIn, middleware.isMerchant, functi
     }
     return res.redirect('/product/' + newItem._id);
   });
-
-
 });
+
 router.get("/dashboard", middleware.isLoggedIn, middleware.isMerchant, function(req, res, next) {
   return res.render("seller/dashboard", { user: req.user } );
 });
@@ -122,7 +131,7 @@ router.post("/signup", middleware.isLoggedIn, function(req, res, next){
     }
     req.user.save();
     
-    return res.redirect("/sellers/add/card");
+    return res.redirect("/sellers/dashboard");
   });
 });
 

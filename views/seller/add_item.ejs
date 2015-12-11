@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+  <title>Hello World E-commerce</title>
+  <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        table
+        {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        table th
+        {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+        table th, table td
+        {
+            padding: 5px;
+            border-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+</script>
+  <% include ../partials/navbar %>
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Choose product to add items to</h2>
+        <hr>
+      </div>
+    </div>
+    <% products.forEach(function(product) { %>
+    <div class="row text-center">
+      <div class="col-md-4 col-sm-4 hero-feature">
+          <div class="thumbnail">
+            <a href="/sellers/add/<%= product._id %>/item"><img src="<%= product.static_data.img_url %>" alt=""></a>
+              <div class="caption">
+                <h4>
+                  <a href="/sellers/add/<%= product._id %>/item"><p><%= product.name %></p></a>
+                </h4>
+              </div>
+          </div>
+      </div>
+    </div>
+    <% }); %>
+</div>
+  <script src="/javascripts/drop.js"></script>
+</body>
+

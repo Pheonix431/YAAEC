@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+  <title>Hello World E-commerce</title>
+  <link rel="stylesheet" href="/stylesheets/jquery.simple-dtpicker.css"/>
+  <script src="/javascripts/drop.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/jquery.simple-dtpicker.js"></script>
+  <script src="/javascripts/add_item.js"></script>
+</head>
+
+<body>
+  <% include ../partials/navbar %>
+<div class="col-sm-6 col-sm-offset-3">
+  <h2>Add items</h2>
+  <form ng-submit="addItem()" ng-app="item" ng-controller="page" method="post">
+      <div class="form-group signup">
+        </br>
+        <h4>Buy only option</h4>
+        </br>
+          <div id="input_container" style="width:100px;">
+            <input class="form-control" type="text" ng-model="buy_only_count" id="input" placeholder="quantity" style="">
+          </div>
+          </br>
+          <div id="input_container">
+            <input class="form-control" type="text" ng-model="price" id="input" name="price" placeholder="price" style="width:120px;">
+          </div>
+          </br>
+          <div id="input_container" style="width:280px">
+            <input type="text" class="form-control" ng-model="condition" name="condition" placeholder="Condition (eg. 'Good', 'Used', 'Mint')" style="">
+          </div>
+          </br>
+
+
+      <script> $(function(){ $('#date').appendDtpicker(); }); </script>
+        <h4>Auction</h4>
+        </br>
+          <div id="input_container" style="width:100px;">
+            <input class="form-control" type="text" ng-model="auction_count" id="input" name="auction_count" placeholder="quantity" style="">
+          </div>
+          </br>
+          <div id="input_container">
+            <input class="form-control" type="text" ng-model="starting_bid" id="input" name="starting_bid" placeholder="Starting bid" style="width:120px;">
+          </div>
+          </br>
+          <div id="date_picker">
+            <label>Pick date and time to start bid</label>
+            <input class="form-control" type="text" name="date" id="date"/>
+            </br>
+          </div>
+          </br>
+          <div id="input_container" style="width:280px">
+            <input type="text" class="form-control" ng-model="auction_condition" name="condition" placeholder="Condition (eg. 'Good', 'Used', 'Mint')" style="">
+          </div>
+          </br>
+      </div>
+      <div class="form-group">
+      </div>
+      <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+  </form>
+</div>
+
+</body>
+
+</html>
+
+

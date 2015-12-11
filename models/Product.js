@@ -5,7 +5,7 @@ var ProductSchema = new mongoose.Schema({
   SKU: String,
   UPC: String,
   auction: {
-    start: Date,
+    start: { type: Date, default: Date.now },
     end: Date
   },
   bidders: [{  type: mongoose.Schema.Types.ObjectId, ref: "Bid" }]
