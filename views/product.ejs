@@ -50,7 +50,7 @@
                         <a ng-click="showForm = true" ng-hide="showForm" class="btn btn-success">Leave a Review</a>
                     </div>
 
-                    <h2 ng-hide="showForm" style="text-align:center;"> No reviews </h2>
+                    <h2 ng-if="reviews.length == 0" ng-hide="showForm" style="text-align:center;"> No reviews </h2>
                     <hr>
 
                     <div class="row" ng-repeat="review in reviews">
